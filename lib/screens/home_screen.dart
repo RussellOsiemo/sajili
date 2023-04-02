@@ -89,9 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<dynamic> Logout() async {
     await FirebaseAuth.instance.signOut();
-
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => LoginScreen(),
-    ));
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => LoginScreen(),
+      ),
+    );
   }
 }
