@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "852623837764",
+    "project_id": "sajili-9a93f",
+    "storage_bucket": "sajili-9a93f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852623837764:android:f7ee45cb34e2c3b5ba8a11",
+        "android_client_info": {
+          "package_name": "com.example.sajili"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852623837764-q0iij2g7gjhcoa6g7koes15nds9bog0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0CzGqyIQ4CB7uM2WyrFiQIA9VHnxxz-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852623837764-q0iij2g7gjhcoa6g7koes15nds9bog0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
