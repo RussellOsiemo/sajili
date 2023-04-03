@@ -29,12 +29,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
         textTheme: const TextTheme(
-          headline1: const TextStyle(
+          displayLarge: TextStyle(
             fontSize: 46.0,
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
-          bodyText1: const TextStyle(fontSize: 18.0),
+          bodyLarge: TextStyle(fontSize: 18.0),
         ),
       ),
       home: LoginScreen(),

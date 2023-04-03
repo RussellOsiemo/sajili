@@ -7,6 +7,7 @@ import 'package:sajili/helper/firebase_auth.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
+
   HomeScreen({required this.user});
 
   @override
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late User _currentUser;
+
   @override
   void initState() {
     _currentUser = widget.user;
@@ -24,71 +26,78 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        title: Text("Karibu Nyumbani"),
-        centerTitle: true,
-      ),
-      body: WillPopScope(
-        onWillPop: () async {
-          final logout = await showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: new Text('Are you sure?'),
-                content: new Text("Do you want to logout from the App?"),
-                actionsAlignment: MainAxisAlignment.spaceBetween,
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Logout();
-                    },
-                    child: const Text('Yes'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    },
-                    child: const Text('No'),
-                  ),
-                ],
-              );
-            },
-          );
-          return logout!;
-        },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Name: ${_currentUser.displayName}',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
-                },
-                child: const Text('Sign Out'),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-                ),
-              ),
-            ],
-          ),
+        appBar: AppBar(
+          backgroundColor: Colors.deepPurpleAccent,
+          title: const Text('Karibu Nyumbani'),
+          centerTitle: true,
         ),
-      ),
-    );
+        body: WillPopScope(
+          onWillPop: () async {
+            final logout = await showDialog<bool>(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: new Text('Are you sure?'),
+                  content: new Text('Do you want to logout from this App'),
+                  actionsAlignment: MainAxisAlignment.spaceBetween,
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Logout(context);
+                      },
+                      child: const Text('Yes'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                      child: const Text('No'),
+                    ),
+                  ],
+                );
+              },
+            );
+            return logout!;
+          },
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'NAME: ${_currentUser.displayName}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                SizedBox(height: 16.0),
+                Text(
+                  'EMAIL: ${_currentUser.email}',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('Sign out'),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.redAccent),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 
-  Future<dynamic> Logout() async {
+  Future<void> Logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
+
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => LoginScreen(),
